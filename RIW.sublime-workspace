@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"index",
+				"indexInverse"
+			],
+			[
 				"de",
 				"delimiteur"
 			],
@@ -28,14 +32,61 @@
 	"buffers":
 	[
 		{
-			"contents": "import re\n\ndef toDico(path):\n	articles = {}\n	article = {}\n	record =0\n	id = -1\n	text = ''\n	separateurs = ['.I','.T','.W','.B','.A','.N','.X','.K']\n	with open(path, 'r') as cacm:\n		for line in cacm:\n			if (line[0:2]==\".I\"):\n				if (id<>-1):\n					articles[id] = article\n					article={}\n				id = int(line [3:])\n			elif (line[0:2] in separateurs):\n				delimiteur = line[0:2]\n			elif (line[0:2] not in separateurs and id <>-1 and delimiteur <>'.I'):\n				article[delimiteur]=line.replace('\\n', ' ')\n		articles[id] = article\n	return articles\n\ndef toListCW(comonwords):\n	lComonWords =[]\n	with open(comonwords, 'r') as CW:\n		for word in CW:\n			lComonWords+=[word[:-1]];\n	return lComonWords\n\ndef createVocab(cacmfile, comonwords):\n	vocabulaire=[]\n	\n	return vocabulaire\n\nprint toDico('CACM\\cacm.all')[3204]['.N']\nprint toListCW('CACM\\common_words')",
 			"file": "main.py",
-			"file_size": 872,
-			"file_write_time": 130927664784864365,
 			"settings":
 			{
-				"buffer_size": 836,
+				"buffer_size": 4193,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "package Timer;\n\nimport java.io.BufferedInputStream;\nimport java.io.IOException;\nimport java.io.PrintWriter;\nimport java.net.InetSocketAddress;\nimport java.net.Socket;\nimport java.net.SocketException;\nimport java.text.DateFormat;\nimport java.util.Date;\n\npublic class ClientProcessor implements Runnable{\n\n   private Socket sock;\n   private PrintWriter writer = null;\n   private BufferedInputStream reader = null;\n   \n   public ClientProcessor(Socket pSock){\n      sock = pSock;\n   }\n   \n   //Le traitement lancé dans un thread séparé\n   public void run(){\n      System.err.println(\"Lancement du traitement de la connexion cliente\");\n\n      boolean closeConnexion = false;\n      //tant que la connexion est active, on traite les demandes\n      while(!sock.isClosed()){\n         \n         try {\n            \n            //Ici, nous n'utilisons pas les mêmes objets que précédemment\n            //Je vous expliquerai pourquoi ensuite\n            writer = new PrintWriter(sock.getOutputStream());\n            reader = new BufferedInputStream(sock.getInputStream());\n            \n            //On attend la demande du client            \n            String response = read();\n            InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();\n            \n            //On affiche quelques infos, pour le débuggage\n            String debug = \"\";\n            debug = \"Thread : \" + Thread.currentThread().getName() + \". \";\n            debug += \"Demande de l'adresse : \" + remote.getAddress().getHostAddress() +\".\";\n            debug += \" Sur le port : \" + remote.getPort() + \".\\n\";\n            debug += \"\\t -> Commande reçue : \" + response + \"\\n\";\n            System.err.println(\"\\n\" + debug);\n            \n            //On traite la demande du client en fonction de la commande envoyée\n            String toSend = \"\";\n            \n            switch(response.toUpperCase()){\n               case \"FULL\":\n                  toSend = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM).format(new Date());\n                  break;\n               case \"DATE\":\n                  toSend = DateFormat.getDateInstance(DateFormat.FULL).format(new Date());\n                  break;\n               case \"HOUR\":\n                  toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());\n                  break;\n               case \"CLOSE\":\n                  toSend = \"Communication terminée\"; \n                  closeConnexion = true;\n                  break;\n               default : \n                  toSend = \"Commande inconnu !\";                     \n                  break;\n            }\n            \n            //On envoie la réponse au client\n            writer.write(toSend);\n            //Il FAUT IMPERATIVEMENT UTILISER flush()\n            //Sinon les données ne seront pas transmises au client\n            //et il attendra indéfiniment\n            writer.flush();\n            \n            if(closeConnexion){\n               System.err.println(\"COMMANDE CLOSE DETECTEE ! \");\n               writer = null;\n               reader = null;\n               sock.close();\n               break;\n            }\n         }catch(SocketException e){\n            System.err.println(\"LA CONNEXION A ETE INTERROMPUE ! \");\n            break;\n         } catch (IOException e) {\n            e.printStackTrace();\n         }         \n      }\n   }\n   \n   //La méthode que nous utilisons pour lire les réponses\n   private String read() throws IOException{      \n      String response = \"\";\n      int stream;\n      byte[] b = new byte[4096];\n      stream = reader.read(b);\n      response = new String(b, 0, stream);\n      return response;\n   }\n   \n}",
+			"settings":
+			{
+				"buffer_size": 3672,
+				"line_ending": "Windows",
+				"name": "package Timer;"
+			}
+		},
+		{
+			"contents": "{\n	id:1,\n	\n}",
+			"settings":
+			{
+				"buffer_size": 12,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "{\n  \"geocoded_waypoints\": [\n    {\n      \"geocoder_status\": \"OK\",\n      \"place_id\": \"ChIJD7fiBh9u5kcRYJSMaMOCCwQ\",\n      \"types\": [\n        \"locality\",\n        \"political\"\n      ]\n    },\n    {\n      \"geocoder_status\": \"OK\",\n      \"place_id\": \"ChIJf8cFRhF35kcR0D6LaMOCCwQ\",\n      \"types\": [\n        \"locality\",\n        \"political\"\n      ]\n    }\n  ],\n  \"routes\": [\n    {\n      \"bounds\": {\n        \"northeast\": {\n          \"lat\": 48.857548,\n          \"lng\": 2.4489458\n        },\n        \"southwest\": {\n          \"lat\": 48.7533696,\n          \"lng\": 2.3023274\n        }\n      },\n      \"copyrights\": \"Map data Â©2015 Google\",\n      \"legs\": [\n        {\n          \"distance\": {\n            \"text\": \"26.7 km\",\n            \"value\": 26732\n          },\n          \"duration\": {\n            \"text\": \"30 mins\",\n            \"value\": 1772\n          },\n          \"end_address\": \"Antony, France\",\n          \"end_location\": {\n            \"lat\": 48.7593013,\n            \"lng\": 2.3023274\n          },\n          \"start_address\": \"Paris, France\",\n          \"start_location\": {\n            \"lat\": 48.8572654,\n            \"lng\": 2.3523751\n          },\n          \"steps\": [\n            {\n              \"distance\": {\n                \"text\": \"90 m\",\n                \"value\": 90\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 24\n              },\n              \"end_location\": {\n                \"lat\": 48.857548,\n                \"lng\": 2.3512281\n              },\n              \"html_instructions\": \"Head <b>west</b> on <b>Rue de Rivoli</b> toward <b>Quai de l'HÃ´tel de ville</b>\",\n              \"polyline\": {\n                \"points\": \"}leiHkmjMCPWjBM~@Mf@\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8572654,\n                \"lng\": 2.3523751\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.1 km\",\n                \"value\": 121\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 29\n              },\n              \"end_location\": {\n                \"lat\": 48.8572103,\n                \"lng\": 2.3496674\n              },\n              \"html_instructions\": \"Turn <b>left</b> onto <b>Rue de la Coutellerie</b>\",\n              \"maneuver\": \"turn-left\",\n              \"polyline\": {\n                \"points\": \"uneiHefjMJj@LlAVlCBN@HBFFL\"\n              },\n              \"start_location\": {\n                \"lat\": 48.857548,\n                \"lng\": 2.3512281\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.1 km\",\n                \"value\": 103\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 28\n              },\n              \"end_location\": {\n                \"lat\": 48.85672539999999,\n                \"lng\": 2.3489306\n              },\n              \"html_instructions\": \"Slight <b>left</b> onto <b>Rue Saint-Martin</b>\",\n              \"maneuver\": \"turn-slight-left\",\n              \"polyline\": {\n                \"points\": \"qleiHm|iMKh@If@tB`A\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8572103,\n                \"lng\": 2.3496674\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.2 km\",\n                \"value\": 155\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 32\n              },\n              \"end_location\": {\n                \"lat\": 48.856047,\n                \"lng\": 2.350782\n              },\n              \"html_instructions\": \"Turn <b>left</b> at the 1st cross street onto <b>Quai de Gesvres</b>\",\n              \"maneuver\": \"turn-left\",\n              \"polyline\": {\n                \"points\": \"qieiHywiMf@gBl@}Bp@kC\"\n              },\n              \"start_location\": {\n                \"lat\": 48.85672539999999,\n                \"lng\": 2.3489306\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.6 km\",\n                \"value\": 599\n              },\n              \"duration\": {\n                \"text\": \"2 mins\",\n                \"value\": 90\n              },\n              \"end_location\": {\n                \"lat\": 48.8533129,\n                \"lng\": 2.3578252\n              },\n              \"html_instructions\": \"Continue onto <b>Quai de l'HÃ´tel de ville</b>\",\n              \"polyline\": {\n                \"points\": \"ieeiHkcjML_@d@gBZgAXcATs@FURa@n@sBRo@fAoDf@iBj@{BNi@z@}C@Gt@qCb@eB\"\n              },\n              \"start_location\": {\n                \"lat\": 48.856047,\n                \"lng\": 2.350782\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.4 km\",\n                \"value\": 421\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 56\n              },\n              \"end_location\": {\n                \"lat\": 48.850817,\n                \"lng\": 2.361413\n              },\n              \"html_instructions\": \"Continue onto <b>Quai des CÃ©lestins</b>\",\n              \"polyline\": {\n                \"points\": \"etdiHmokMpAaF|@iD^}AH[ZeAFSHMV]PUNQTOLC@?NC|A?z@?\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8533129,\n                \"lng\": 2.3578252\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.5 km\",\n                \"value\": 542\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 59\n              },\n              \"end_location\": {\n                \"lat\": 48.8468847,\n                \"lng\": 2.3651841\n              },\n              \"html_instructions\": \"Continue onto <b>Quai Henri IV</b>\",\n              \"polyline\": {\n                \"points\": \"sddiHyelMt@?`AA^@ZCRCVCXQJKNOPYPY`AgB~B_EfAeBJS~AoCXUXYXWTI\"\n              },\n              \"start_location\": {\n                \"lat\": 48.850817,\n                \"lng\": 2.361413\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"1.0 km\",\n                \"value\": 985\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 83\n              },\n              \"end_location\": {\n                \"lat\": 48.8403298,\n                \"lng\": 2.374037\n              },\n              \"html_instructions\": \"Slight <b>left</b> onto <b>Voie Mazas</b>\",\n              \"maneuver\": \"turn-slight-left\",\n              \"polyline\": {\n                \"points\": \"_lciHk}lMBGDE@AR_@\\\\UNMTSh@i@d@i@X]vAiB@AHM@C|AaCh@}@`@o@Vc@JUDIDKBKDKDOBO@MDWFa@@I@GBKDKFSDGJUl@}@d@q@@CBEXa@@A?A@??A@ADG?AFGXc@?A@APWBGBCBE`@k@`@m@^i@d@u@z@kAj@u@DE~@kAlC_Dz@aA\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8468847,\n                \"lng\": 2.3651841\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"2.3 km\",\n                \"value\": 2262\n              },\n              \"duration\": {\n                \"text\": \"3 mins\",\n                \"value\": 190\n              },\n              \"end_location\": {\n                \"lat\": 48.8246025,\n                \"lng\": 2.3934322\n              },\n              \"html_instructions\": \"Keep <b>left</b> to continue on <b>Quai de Bercy</b>\",\n              \"maneuver\": \"keep-left\",\n              \"polyline\": {\n                \"points\": \"acbiHwtnM`@e@V[dDwDDE\\\\c@@AX_@DCFIPU@??ANQNQ@??APS@APSV]^i@JMt@_ATWRS\\\\[b@_@`@]^a@FGV_@v@gAxAmBT[@AFI@A?AzByCf@_Ab@}@P_@R]^g@b@m@hA}A|CgEfAwAb@m@fCmDd@q@^i@Xe@T]\\\\c@dB_CT[FIZc@@ALOv@}@^c@hDwCv@s@JKFGTS@ABCJIDEBELMHOLSN[Xg@Tc@HQ@A?AFMLWTc@h@gABG@A@CJSHQ?A@C@??APa@@C?A@??ALW@G@A@C?A@ABGFONWBE?ABGNYTa@BC@CJQHKBAPUf@a@zAuAh@i@VY|@cAr@iAf@s@\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8403298,\n                \"lng\": 2.374037\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"3.5 km\",\n                \"value\": 3476\n              },\n              \"duration\": {\n                \"text\": \"3 mins\",\n                \"value\": 167\n              },\n              \"end_location\": {\n                \"lat\": 48.8174038,\n                \"lng\": 2.4377714\n              },\n              \"html_instructions\": \"Continue onto <b>A4</b>\",\n              \"polyline\": {\n                \"points\": \"w`_iH}mrM`@q@NUbAeBZg@Vc@pAyBlAqBR_@~@gBpAsC|@}Bh@wAf@yA~@aDNi@Li@l@_Ct@eDhAqF`@yBZeBZmBVoAh@gDv@uFNoAXiBZsBViBb@wCl@aEN{@XsBLcAL}@Fi@Jy@JaADo@Fm@LuBLoBBq@FkB?q@@y@Aw@?I?E?m@CsAKyEAOCkBAy@?aC@{H@e@?_@@Y@u@Dm@B}@D}@LgBFeADiABg@@U@i@@g@@}@?w@?cA?q@CsDGaHCwEUcWEaFEuE?qAAoC?gA?w@?wB\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8246025,\n                \"lng\": 2.3934322\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"1.2 km\",\n                \"value\": 1203\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 58\n              },\n              \"end_location\": {\n                \"lat\": 48.8115487,\n                \"lng\": 2.4489346\n              },\n              \"html_instructions\": \"Take the <b>A86</b> exit toward <b>A6</b>/<b>A10</b>/<b>SÃ©nart</b>/<b>CrÃ©teil</b>\",\n              \"maneuver\": \"ramp-right\",\n              \"polyline\": {\n                \"points\": \"ws}hHac{MNi@@G?EFaCPqEFoAHmBNsDd@}KF}@B]@M@S@Q@ED_@BSD[DYFYHe@BMDQH[Lc@HWNe@HSJULYLUHOJSZe@NSPSd@i@PMPONMf@]x@c@\\\\Qj@WTKTIZMNEf@Of@OFC@?@??ALCjBa@f@Kl@GTCd@GPA?A@?LAVCD?DA@APK\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8174038,\n                \"lng\": 2.4377714\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"15.6 km\",\n                \"value\": 15617\n              },\n              \"duration\": {\n                \"text\": \"12 mins\",\n                \"value\": 748\n              },\n              \"end_location\": {\n                \"lat\": 48.7625681,\n                \"lng\": 2.3128941\n              },\n              \"html_instructions\": \"Continue onto <b>A86</b>\",\n              \"polyline\": {\n                \"points\": \"eo|hHyh}Mt@CV@^?|BB~@B\\\\@@?@?@?@?nFLzABd@BH?n@BlIR@?D@X@B?ZBbFZL@NB`@DtBXj@Ll@Nj@Rl@PTHl@T^P@?@@LF@?\\\\Nh@V@?NHHFb@Vr@^jBnA`CdBr@l@PNdH`GxBfBdBpAdAr@\\\\TNHfAl@^TB@ZN~@h@vAr@rAn@fBt@h@VND@@fA^hA^nBl@dCp@b@Nz@NvBb@fC^`ALrCVlDRR@T?dABtA@tC?V?l@Ar@EZE~@Gn@CdCSfAM~@MxASfBWhB[bAMzAYt@Kh@IZGf@Ib@EXEVAj@Ad@@V@XBf@HXFd@NXHz@`@PLRLf@`@f@b@`@d@RTHNJJFLHNBDBDBBHNLTHPJVTf@N`@Tp@J`@Nh@Lp@H\\\\L~@F`@DZDb@B^D`@@b@Dx@?x@DdCBxC?D@f@@j@D~DB~A@xAD~CBzBD|BD~BFtFBjB?zA?vAA|@AxAEzAEhAI`CEx@Cn@Ch@ClAItBMlDObEOnEMnDCv@AZAT?DAl@AZAd@?x@@j@?p@@H?XB`@?D@VB`@Dp@BRBZD`@F`@BRN`AJf@FXH^V`AXdARl@\\\\jAvCpJ`@nADHL`@T|@V`ALh@RhAFb@@LFf@Fd@LfBBr@BhA@`D@\\\\AZ@lB?zABjBBnAHrBFzABd@F~@Fn@Db@Fp@Dd@Fl@Hl@Ff@Lz@BN@JF^RzAh@pDTlARnADPDNThAP|@Ln@?@Lh@TtAZbBVbBPnABJV|BR|AHp@\\\\fERpCd@|Gj@pIn@nJLnB\\\\rFd@dHRbDVvELlBLbBFj@DZBPPz@FZT|@f@vAb@~@\\\\j@Zd@j@n@\\\\XXPr@`@`@Pb@L^H^D^B\\\\?TARAZCd@IVIVI\\\\Oh@WfAo@`GoD~FqDvDwBtDwBbEaC|CkBBAz@c@l@YFEVKVIZMXG\\\\Id@GXCf@E^?n@Ar@@`@DTDVDVFt@T\\\\Ld@Tj@\\\\h@\\\\h@d@b@`@n@t@d@n@LRJNNXHNDFVh@Xn@Vp@Vv@JZf@dBV`ARz@H`@F^H`@Ff@D^F`@B`@Bd@B^DfA@dA?hAAfACfAC`@MpDOpDEfAK|BMjDKzBChACdAAhA?fA@jCBlB@bAD|FTvXFdJ@nC?bA?lBE`IEzFI`HAn@Ax@IlCC|@AJIjBMdCIhA[rEEf@G`AMlBq@zI_@hF]bE[jE_@pEGr@E`@Kn@Gb@I`@UdAc@bBk@vBMb@I`@GXGXEREZCTGd@Gn@Eb@C`@C`@C`@Ab@?r@?b@?d@DfBDhA@RBhA@d@@bA?pA?bAAx@Cd@Cl@Et@ANANEh@ANMfBOfBC`@E|@Cf@Ad@Cb@Cr@En@El@M`BGz@Gh@Gj@Ip@Ih@Ih@Kl@SfAKh@CFOt@U~@s@|CqF|UADGTOh@AFSx@o@lC_@bBCF{@xD{@vDqArFoArFGVMh@K`@I\\\\Or@Ov@Mt@Q|@Id@Kl@E\\\\[fB[bB_@hBs@`DKd@[rA\"\n              },\n              \"start_location\": {\n                \"lat\": 48.8115487,\n                \"lng\": 2.4489346\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.1 km\",\n                \"value\": 147\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 11\n              },\n              \"end_location\": {\n                \"lat\": 48.7632621,\n                \"lng\": 2.3112271\n              },\n              \"html_instructions\": \"Take exit <b>27</b> toward <b>N20</b>/<b>N186</b>/<b>Paris-Porte d'OrlÃ©ans</b>/<b>Antony</b>/<b>Sceaux</b>/<b>Bourg-la-Reine</b>\",\n              \"maneuver\": \"ramp-right\",\n              \"polyline\": {\n                \"points\": \"a}rhHqvbMOPABADU~@k@tB_@|AGRA@ID\"\n              },\n              \"start_location\": {\n                \"lat\": 48.7625681,\n                \"lng\": 2.3128941\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.6 km\",\n                \"value\": 553\n              },\n              \"duration\": {\n                \"text\": \"2 mins\",\n                \"value\": 92\n              },\n              \"end_location\": {\n                \"lat\": 48.7628877,\n                \"lng\": 2.3040854\n              },\n              \"html_instructions\": \"Merge onto <b>Avenue du Dr TÃ©nine</b>/<b>D986</b><div style=\\\"font-size:0.9em\\\">Continue to follow D986</div>\",\n              \"maneuver\": \"merge\",\n              \"polyline\": {\n                \"points\": \"kashHelbMCP?FCNCPG`@If@M~@Gb@I\\\\CNCL]|AKz@AVAZ@`@@^@`@B`@B^B`@Ff@Fn@LbALbAN`AXtBH^Jr@XbBd@fC\"\n              },\n              \"start_location\": {\n                \"lat\": 48.7632621,\n                \"lng\": 2.3112271\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.2 km\",\n                \"value\": 154\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 46\n              },\n              \"end_location\": {\n                \"lat\": 48.761818,\n                \"lng\": 2.302818\n              },\n              \"html_instructions\": \"Slight <b>left</b> onto <b>Avenue le Brun</b>/<b>Avenue LÃ©on Blum</b>/<b>D77</b><div style=\\\"font-size:0.9em\\\">Continue to follow Avenue LÃ©on Blum</div>\",\n              \"maneuver\": \"turn-slight-left\",\n              \"polyline\": {\n                \"points\": \"a_shHq_aMDf@v@t@h@d@^b@j@l@PVNN\"\n              },\n              \"start_location\": {\n                \"lat\": 48.7628877,\n                \"lng\": 2.3040854\n              },\n              \"travel_mode\": \"DRIVING\"\n            },\n            {\n              \"distance\": {\n                \"text\": \"0.3 km\",\n                \"value\": 304\n              },\n              \"duration\": {\n                \"text\": \"1 min\",\n                \"value\": 59\n              },\n              \"end_location\": {\n                \"lat\": 48.7593013,\n                \"lng\": 2.3023274\n              },\n              \"html_instructions\": \"Turn <b>left</b> onto <b>Rue d'Alsace Lorraine</b><div style=\\\"font-size:0.9em\\\">Destination will be on the left</div>\",\n              \"maneuver\": \"turn-left\",\n              \"polyline\": {\n                \"points\": \"kxrhHsw`MDGNQV[^a@JIFCD?F?b@Lv@XvEpBNJ~@^B@\"\n              },\n              \"start_location\": {\n                \"lat\": 48.761818,\n                \"lng\": 2.302818\n              },\n              \"travel_mode\": \"DRIVING\"\n            }\n          ],\n          \"via_waypoint\": []\n        }\n      ],\n      \"overview_polyline\": {\n        \"points\": \"}leiHkmjM[|B[fBXxBZ|CDPFLKh@If@tB`AtAeF`C{In@wBZw@rD}LxBkIhFcSh@yBb@yAbAsAb@SPCpGAz@Aj@Gd@]`@i@rAaCfEeHjBcDr@o@XWTIHMTa@l@c@~@}@~@gAbByBjDsFn@oARw@PqARs@P]rAoB`@m@@Ch@y@bCoDrC}DlEkF|AgB|DsEb@i@h@o@r@{@f@k@xBuCh@k@`A{@`A_A^g@hDsEdCgDjA}Bd@}@jH{JxGeJlBqC~CiEfBsBtF_Fp@o@V]\\\\o@z@_B|AaD|@oBf@iAn@kAj@u@bCwB`AcA|@cAr@iAhAeBfCgE~CkFrAgCpAsC|@}BpAqDnAkEz@iD~BwK|@_Fr@}D`B}K|AwKzBiOn@eFPqBTcDPaDF}C?aCQkJEeD@}LDuCp@_NDgEKkQe@sk@AaJ?wBNi@@MXsIP}D`AmTFy@TiBZ_Bp@}Bp@yA`A}Av@}@b@]v@k@vAu@rB{@jBi@`Ds@zBUl@GFCPKt@Cv@@|DFb@@rJThM^pF\\\\p@H`Df@xAb@bAZlAf@RHhAf@pBhAlFtDdA|@dH`G~ExDbBhAvAv@~BpAjDbBpClAbDfAtF~A~A^~FbAtEd@`ETzABjF@dAAnAKnBKlEa@xCa@pJ{AbDg@|@KbAC|@B`AL~@VtAj@d@ZnAdAjAvATb@^n@z@rB`@rA\\\\zAd@zCPhCNrKXnVV~Q?rDCvC[`JU|GcA`ZEhDB`CH`BRbCf@~CPx@p@fCjFzP`AjD`@rBHp@NlAPzCDdH@hEFzDPnEJdBZjDhAvI~@~FX`Bz@fE~@dFh@rDZhC\\\\nCp@xInCna@bAxOj@zJZpELfATlA\\\\xAf@vAb@~@x@pAhAhAlAr@dA^~@N|@Bh@C`AMn@SfAg@hI_FvLiHxJyF`DmBhB}@rAi@v@Q~@KfAEbB?v@Jn@LrAb@pAr@rAbArAvAr@bAZh@`ApBn@hBr@`Cj@|BP`A^jCPnD@nCEnCg@lMi@nNEnC@rE`@ff@HtN?pDK|PKpIQpGWpFe@|GmArPyBjYa@hD_@fBoAzEg@xBWjBUvCE|CLjFDnB@tCA|BGrAO~Bc@`GOnD]rFa@bEs@hEu@fDeKpc@sIf_@u@jDu@fE}ArI_AfE[rAOPCHaAtDi@rBIDCXYjBc@pCa@jBMrA?|@B`ARjCr@xFhAlHd@fCDf@`BzAlBxBTYv@}@RML?zAf@fF|BbA`@\"\n      },\n      \"summary\": \"A86\",\n      \"warnings\": [],\n      \"waypoint_order\": []\n    }\n  ],\n  \"status\": \"OK\"\n}",
+			"settings":
+			{
+				"buffer_size": 17049,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "def renduMonnaie(somme):\n    dispo = [2,1,0.5,0.2,0.1,0.05,0.01]\n    rendu = {}\n    \n    for valeur in dispo:\n        rendu[valeur]=floor(somme/valeur)\n        somme -= rendu[valeur]\n    \n    return rendu",
+			"settings":
+			{
+				"buffer_size": 204,
+				"line_ending": "Windows",
+				"name": "def renduMonnaie(somme):"
+			}
+		},
+		{
+			"contents": "Introduction :\n\nCet article sert de memento, il n'est adapté à l'apprentissage de PHP qu'aux gens ayant quelques notions d'algorithmique et de programmation. Pour ceux qui n'ont jamais fait de programmation, des tutos plus adaptés vous guideront pas à pas (voir la partie I si dessous).\n  \nI - Ou apprendre le PHP gratuitement sur le net ?\n\nVoici quelques liens intéressants pour apprendre le PHP de manière plus approfondie :\n\nCours de PHP 5 de Guillaume Rossolini (developpez.com)\nPHP : Le tutoriel pour grands débutants pressés de Sylvie Vauthier (developpez.com)\nLe manuel PHP en ligne\n\nII - Les commentaires et variables\n\n\nCommentaires sur une ligne :\n\n// Commentaire sur une ligne\n# autre commentaire sur une ligne\n\nCommentaires sur une à plusieurs lignes :\n\n/* Commentaire\nsur plusieurs\nlignes */\n\nLes variables :\n\n$variable = 10; // variable normale qui a pour valeur 10 par affectation\n$array = array (\"bonjour\", \"salut\"); // tableau de deux case ayant pour valeur respective \"bonjour\" et \"salut\"\n$tab[0] = 100; // première case du tableau $tab qui a pour valeur 100 par affectation\n$_GET, $_POST, $_SESSION, $_COOKIE, $_REQUEST, etc // différentes variables superglobales\n\nIII - Les structures de contrôles\n\nLes opérateurs de comparaison :\n\n \n\nOpérateur\n\nDésignation\n\n==\n\nÉgalité\n\n<\n\nInfériorité (stricte)\n\n>\n\nSupériorité (stricte)\n\n<=\n\nInfériorité (non stricte)\n\n>=\n\nSupériorité (non stricte)\n\n!=\n\nDifférence\n\n===\n\nIdentique (type et valeur)\n\n!==\n\nDifférence (type ou valeur)\n\n \n\n \n\nLes booléens :\n\nOpérateur\n\nDésignation\n\n&&\n\nET logique\n\n||\n\nOU logique\n\n!\n\nNON logique\n\n \n\nCondition if :\n\nif ($variable <= 100) // Si $variable a une valeur inférieure ou égale à 100\n{\n        // traitements dans le cas ou $variable est inférieur ou égale à 100\n}\nelse if ($variable <= 200) // Sinon si $variable a une valeur inférieure ou égale à 200\n{\n        // traitements dans le cas ou $variable est comprise entre 101 et 200\n}\nelse\n{\n        // traitements dans le cas ou $variable est strictement supérieur à 200\n}\n\nCondition switch :\n\nswitch ($variable) // selon la valeur de $variable\n{\n        case \"bonjour\": // Cas \"bonjour\" => si la valeur de $variable est \"bonjour\"\n                // Traitements dans le cas où $variable à pour valeur \"bonjour\"\n                break;\n        case 10: // Cas \"10\" => si la valeur de $variable est de 10\n                // Traitements dans le cas où $variable à pour valeur 10\n                break;\n        default: // Cas \"sinon\" ou \"defaut\" => si $variable à pour valeur, une valeur différente de \"bonjour\" ou 10;\n                // traitements\n               break; // ici facultatif\n\n}\n\nIII - Les structures itératives\n\nLes opérateurs de comparaison et booléens : \n\nils sont les mêmes que pour les structures de contrôles.\n \nLa boucle while :\n\n$i = 0;\n$j = FALSE;\nwhile ($i < 10 || $j != TRUE) // Tant que $i est in ferieur à 10 ET tant que $j est différent de FALSE, répeter\n{\n       $i++; // $i = $i +1\n\n       if ($i == 5) // Si $i = 5\n               $j = TRUE;\n}\n\nLa boucle for :\n\n$i = 0;\n$j = FALSE;\nfor ($i = 0 ; $i < 10 && $j == FALSE ; $i++) \n// Pour $i de 0 jusqu'à 10 (pas de 1) et tant que $j à pour valeur FALSE, répeter\n{\n       // traitements  \n}\n\nLa boucle foreach :\n\n$tab = array (1,2,3,4);\nforeach ($tab as $value)\n/* Parcours le tableau case par case et associe $value à la case du tableau ou\n   se situe l'index en cours */\n{\n       $value = $value * 2; // On multiplie la valeur par 2  \n}\n\nLe tableau $tab contiendra, après l'exécution de la boucle, ces valeurs (dans l'ordre) : 2,4,6 et 8 \n\nIV - Les fonctions \n\nFonctions et procédures   :\n\n // fonction (retourne une valeur)\nfunction nom_fonction ($parametre1, $parametre2)\n{\n        return $parametre1 + $parametre2; \n       // on retourne une valeur (additionnant les deux paramètres ou arguments)\n}\n\n// procédure (ne retourne rien)\nfunction nom_fonction ($parametre1, $parametre2)\n{\n       echo $parametre1 + $parametre2; \n       // on affiche une valeur (additionnant les deux paramètres ou arguments)\n}\n\nFonctions testant l'existance et le contenu d'une variable   :\n\nisset ($variable) // renvoie TRUE si $variable n'est pas égale à NULL sinon FALSE\nempty ($variable) /* renvoie TRUE si $variable n'est pas vide (différent de NULL, de \"\", de FALSE, d'un tableau vide, d'une variable déclarée par le mot clef var mais sans valeur) sinon FALSE */\n\nFonctions d'affichage  :\n\necho \"hello world\";\nprint \"salut tout le monde\";\nprintf (\"Bonjour %s\", \"tux\");\nprint_r ($tableau); // pour débugger\n\n\nFonctions d'inclusions  :\n\ninclude (\"chemin/fichier.php\"); // warning si le fichier n'existe pas\nrequire (\"chemin/fichier.php\"); // erreur si le fichier n'existe pas\nrequire_once (\"chemin/fichier.php\"); // erreur si le fichier n'existe pas et permet de le ré-inclure\n\nFonctions d'approximation numérique :\n\nceil (3.4); // retourne l'entier supérieur à 3.4 (4)\nfloor (3.4); // retourne l'entier inférieur à 3.4 (3)\nround (3.4); // retourne l'entier le plus proche de 3.4 (3)\n\nFonctions de chaînes de carractères :\n\nstrlen ($chaine); // retourne la longueure de la chaîne\nstrpos ($chaine1, $chaine2); // retourne la position de $chaine1 dans $chaine2\n$chaine = str_replace (\"a\", \"b\", $chaine); // remplace 'a' par 'b' dans $chaine\n$chaine = preg_replace (\"/a/\", \"b\", $chaine); // pareil que precedement\n$tableau = preg_split (\"//\", $chaine); // stocke chaque carractère d'une chaîne dans un tableau\n$tableau = explode (\";\", $chaine); // éclate $chaine dans un tableau en fonction du carractère \";\"\n$chaine2 = substr (0, 9, $chaine); //stocke dans $chaine2 le contenu de $chaine entre la position 0 et 9\n$chaine = nl2br ($chaine); // remplace tout les retour à la ligne (\\n et \\n\\r) par des balises <br />\n$chaine = htmlentities ($chaine); // conversion des carractères spéciaux en entités HTML\n$chaine = html_entity_decode ($chaine) // conversion des entités HTML en carractères spéciaux\n$chaine = addslashes ($chaine); // echape certains carractères comme \" ou ' ou \\ par un \\\n$chaine = stripslashes ($chaine); // retire les carractères d'echappement\npreg_match (\"/^[0-9]*$/\", $chaine); /* vérifie que le contenu de $chaine correspond à l'expression régulière\nplacée en paramètre (ici qu'il s'agit d'une chaine uniquement composé de chiffres entre 0 et 9). Renvoie TRUE ou FALSE */\n\nFonction de taille de tableau :\n\nsizeof ($tableau); // retourne le nombre d'éléments d'un tableau $tableau\n\nFonction de redirection :\n\nAttention : les redirections sont a écrire avant tout affichage HTML\n\n$url = \"http://adresse_url_choisie\"; // adresse de redirection\n$tps = 3; // temps de redirection (en secondes)\nheader (\"Refresh: $tps ; URL='$url'\"); // redirige vers l'adresse $url en $tps secondes\n\nFonction pour envoyer un E-MAIL :\n\n// expéditeur\n$lexpediteur = \"adresse_email@service.com\";\n\n// entête de l'Email\n$headers  = \"From: \".$expediteur.\"\\n\"; // expediteur\n$headers .= \"Reply-To: \".$expediteur.\"\\n\"; // pour répondre\n$headers .= \"Content-Type: text/html; charset=\\\"iso-8859-1\\\"\\n\"; // encodage (pour interpréter le code HTML)\n$headers .= \"Content-Transfer-Encoding: 8bit\";\n\n// sujet de l'Email\n$subject = \"Sujet du message\";\n\n// message\n$msg = \"   Salut !!!\";\n\n// destintaire\n$dest = \"adresse_email2@service.com\";\n\n// envoi de l'Email\nmail ($dest, $subjetc, $msg, $headers);\n\nV - La gestion de fichiers\n\nAccès rapide  :\n\n$chaine = file_get_contents (\"nom_fichier.txt\"); // lecture (stocke le contenu du fichier dans une chaine)\nfile_put_contents (\"nom_fichier.txt\", $chaine); // écrit le contenu de $chaine dans le fichier\n\nAccès approfondis   :\n\n$fichier = fopen (\"nom_fichier.txt\", \"r+\"); // ouvre le fichier\n$tableau = file ($fichier); // stocke le contenu du fichier ligne par ligne dans un tableau\nfwrite (\"nom_fichier.txt\", $chaine); // écrit le contenu de $chaine dans le fichier\n\nVI - Les sessions\n\nsession_start (); // activer les sessions\n$_SESSION['ma_session'] = \"mon_pseudo\";  // stocke la chaîne \"mon_pseudo dans la session \"ma_session\n$_SESSION['ma_session'] = NULL; // vide la session \"ma_session\"\nsession_destroy (); // détruit les sessions en cours\n\nVII - La gestion de base de données\n\nPour MySQL :\n\n// connexion et selection d'une base MySQL\n$connexion = mysql_connect (\"serveur\", \"user\", \"mot_de_passe\", \"base\") or die (\"Connexion impossible à MySQL ...\");\nmysql_select_db (\"base\", $connexion) or die (\"Selection de la base impossible ...\");\n\n// fermeture de la base\nmysql_close ($connexion);\n\nRemarque : il existe des fonctions similiares à mysql_connect () comme mysql_pconnect () qui a l'avantage de n'ouvrir qu'une seule connexion par identifiant de base en cours (mysql_close () est inutile dans ce cas donc). On parle ici de connexion persistante.\n\n// Exécuter et exploter le résultat d'une requête de type SELECT :\n$sql = \"SELECT * FROM table;\"; // requête contenue dans une chaîne\n$req = mysql_query ($sql) or die (\"Erreur\".mysql_error()); // exécution de la requête\n// mysql_error () affiche le message d'erreur de MySQL en cas d'erreur\n\nif (mysql_num_rows ($req) >= 1) // Si la requête contient une ou plusieurs ligne\n{\n        // On parcours les lignes du résultat et on stocke la ligne dans $res\n        while ($res = mysql_fetch_array ($req))\n        {\n                echo $res['champs_1']; // On affiche le contenu du champs \"champs_1\" de la table (ligne par ligne)\n        }\n\n}\n\n// Pour une requête de type INSERT il suffit de faire :\nmysql_query (\"INSERT INTO table VALUES ('valeur');\");\n\nMaintenant utilisons les fonctions mysqli (v4.1 et 5 de PHP) :\n\n// connexion et selection d'une base MySQL\n$link = mysqli_connect (\"serveur\", \"user\", \"mot_de_passe\", \"base\"); \n\n// Exécuter et exploter le résultat d'une requête de type SELECT :\n$sql = \"SELECT * FROM table;\"; // requête contenue dans une chaîne\n$req = mysqli_query ($link, $sql); // exécution de la requête\n\nwhile ($ligne_res = mysqli_fetch_assoc ($req))\n{\n                print_r ($ligne_res); // On affiche la ligne de la requête\n}\n\nPour PostgreSQL :\n\n// Connexion à une base\n$str_connexion = \"host=localhost port=5432 dbname=base user=util password=passwd\";\n$db_connexion = pg_connect ($str_connexion);\n// connexion à une base de données nommée \"base\" sur l'hôte \"localhost\" avec un nom d'utilisateur \"util\" et un mot de passe \"passwd\"\n\n// fermeture de la base\npg_close ($db_connexion);\n\nRemarque : De même que pour mysql_pconnect (), il existe une fonction pg_pconnect ().\n\n// Exécuter et exploter le résultat d'une requête de type SELECT :\n$sql = \"SELECT * FROM table;\"; // requête contenue dans une chaîne\n$req = pg_exec ($sql) or die (\"Erreur\".pg_errormessage()); // exécution de la requête\n// pg_errormessage () affiche le message d'erreur de PgSQL en cas d'erreur\n\nif (pg_num_rows ($req) >= 1) // Si la requête contient une ou plusieurs ligne\n{\n        // On parcours les lignes du résultat et on stocke la ligne dans $res\n        while ($res = pg_fetch_array ($req))\n        {\n                echo $res['champs_1']; // On affiche le contenu du champs \"champs_1\" de la table (ligne par ligne)\n        }\n\n}\n\n// Pour une requête de type INSERT il suffit de faire :\npg_exec (\"INSERT INTO table VALUES ('valeur');\");\n\nAvec PDO :\nPDO est une classe qui a l'avantage de fonctionner avec différent SGBD dont les principaux qui sont Oracle, PostgreSQL et MySQL.   \n\n// Connexion à une base\n$str_connexion = \"mysql:dbname=base;host=serveur\"; \n// connexion à une base de données MySQL nommée \"base\" sur l'hôte \"serveur\"\n$pdo_connexion = new PDO ($str_connexion, \"utilisateur\", \"mot_de_passe\");\n\n// Exécuter et exploter le résultat d'une requête de type SELECT :\n$sql = \"SELECT * FROM table;\"; // requête contenue dans une chaîne\n\nforeach ($pdo_connexion->query($sql) as $ligne)\n    print_r ($ligne)",
+			"settings":
+			{
+				"buffer_size": 11703,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "CACM/cacm.all",
+			"settings":
+			{
+				"buffer_size": 2187734,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -44,6 +95,15 @@
 			{
 				"buffer_size": 2668,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "computer AND (engineering NOT machine) OR victor\n\n",
+			"settings":
+			{
+				"buffer_size": 50,
+				"line_ending": "Windows",
+				"name": "computer AND (engineering NOT machine) OR victor"
 			}
 		}
 	],
@@ -70,10 +130,34 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 58.0,
-		"last_filter": "disable pa",
+		"height": 392.0,
+		"last_filter": "packac",
 		"selected_items":
 		[
+			[
+				"packac",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"json",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"java",
+				"Set Syntax: Java"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"pac",
+				"Package Control: List Packages"
+			],
 			[
 				"disable pa",
 				"Package Control: Disable Package"
@@ -123,10 +207,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"json",
-				"Pretty JSON: Format (Pretty Print) JSON"
-			],
-			[
 				"pack",
 				"Package Control: Install Package"
 			],
@@ -135,7 +215,7 @@
 				"Set Syntax: Python"
 			]
 		],
-		"width": 528.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -161,6 +241,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Victor/Google Drive/GIT/RIW/main2.py",
 		"/C/Users/Victor/Downloads/chessboard_codility.php",
 		"/C/Users/Victor/Google Drive/GIT/SAASm/app.js",
 		"/C/Users/Victor/Google Drive/GIT/SAASm/sublProject.sublime-project",
@@ -184,7 +265,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -199,6 +280,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"json",
 			"insertEntry",
 			"\n    "
 		],
@@ -218,7 +300,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -227,15 +309,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 836,
+						"buffer_size": 4193,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								534,
-								534
+								3874,
+								3874
 							]
 						],
 						"settings":
@@ -253,16 +335,16 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -288,11 +370,11 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
@@ -304,14 +386,537 @@
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 92.0,
+						"translation.y": 1623.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3672,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3111,
+								3111
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "package Timer;",
+							"bh_regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17049,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15661,
+								15663
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/XML/XML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5598.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								204,
+								204
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "def renduMonnaie(somme):",
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11703,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1091,
+								1091
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 210.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "CACM/cacm.all",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2187734,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1680,
+								1691
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1848.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "CACM/common_words",
 					"semi_transient": false,
 					"settings":
@@ -392,10 +997,97 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
+						"translation.y": 147.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 50,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50,
+								50
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "computer AND (engineering NOT machine) OR victor",
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -403,11 +1095,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 21.0
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"layout":
 	{
@@ -434,7 +1126,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 100.0
+		"height": 225.0
 	},
 	"output.find_results":
 	{
@@ -448,7 +1140,7 @@
 	"project": "RIW.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 38.0
 	},
 	"save_all_on_build": true,
 	"select_file":
