@@ -49,21 +49,28 @@ resultatsEvaluation=rec_dd()
 sourceEval = 'CACM\query.text'
 commonwords = 'CACM\common_words'
 f = csv.writer(open("evaluation.csv", "wb+"))
+g = csv.writer(open("results.csv", "wb+"))
 
 evaluation = index.Index(sourceEval, commonwords)
 evaluation.generateDico()
 
 for requete in evaluation.dico:
 	recherche.setQuery(evaluation.dico[requete]['.W'])
-	recherche.setLimit(20)
+	recherche.setLimit(100)
 	resultsScored = recherche.vectorielSearch(cacm.iIndex)
 	results = [int(result[0]) for result in resultsScored]
-	for k in [1,5,10,20]:
+	for result in range(len(results)):
+		if results[result] in parsedQrels[requete]:
+			results[result]='p' + str(results[result])
+	g.writerow([requete] + results)
+	for k in range(100):
 		# print results
 		# print parsedQrels[requete]
 		if parsedQrels[requete]:
 			resultatsEvaluation[requete][k]['rappel'] = calculRappel(results, parsedQrels[requete],k) 
 			resultatsEvaluation[requete][k]['precision'] = calculPrecision(results, parsedQrels[requete],k) 
+
+
 header = ['requete','ordre','rappel','precision']
 f.writerow(header)
 for requete in resultatsEvaluation:
