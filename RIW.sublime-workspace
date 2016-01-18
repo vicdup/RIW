@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"artc",
+				"articleWeight	statement"
+			],
+			[
+				"dic",
+				"dicoWeights	statement"
+			],
+			[
+				"article",
+				"articleWeight"
+			],
+			[
+				"generatei",
+				"generateIndex	function"
+			],
+			[
+				"bool",
+				"booleanSearch	function"
+			],
+			[
 				"log",
 				"log10	function"
 			],
@@ -112,10 +132,13 @@
 	"buffers":
 	[
 		{
+			"contents": "\nimport search\nimport index\nimport json\n\nsourceEval = 'CACM\\query.text'\nsource = 'CACM\\cacm.all'\ncommonwords = 'CACM\\common_words'\n\n# index.generateInverseIndex()\n# print index.iIndex\n# print sys.getsizeof(index.iIndex)\n# print json.dumps(index.iIndex)\n# print len(index.iIndex.keys())\n\n# print json.dumps(index.iIndex)\n# print search.booleanSearch(index.iIndex)\n# vectorA = {\"victor\": 10, \"pauline\": 5, \"matthieu\": 3, \"aurore\": 12}\n# vectorB = {\"victor\": 2, \"pauline\": 0, \"matthieu\": 3, \"aurore\": 12}\n\n# print search.calculCosinus(vectorA,vectorB)\n# index.generateIIndex()\n# index.generateIndex()\n# import operator\n# print index.generateDico()[398]['.T']\n\n####\n####\n# Evaluation des algorithmes\n####\n####\n\n### Mise sous forme de dictionnaire du fichier query.text\n\nsourceEval = 'CACM\\query.text'\ncommonwords = 'CACM\\common_words'\n\nevaluation = index.Index(sourceEval, commonwords)\ndicoEval = index.generateDico()\n\n### \n\n# print json.dumps(index.generateDico())\n# index.generateIIndex()\n# index.generateIndex()\n# print json.dumps(index.index)\n# print index.iIndex['computer']['total']\n# index.loadIIndexFromFile()\n# search = search.Search('tf-idf')\n# search.setQuery('machine OR program AND logical AND loading NOT boolean')\n# search.setQuery('Intermediate languages used in construction of multi-targeted compilers; TCOLL')\n# search.presentResults(search.vectorielSearch(index.iIndex))\n# print search.booleanSearch(index.iIndex)\n# print json.dumps(index.iIndex, sort_keys=True, indent=4, separators=(',', ': '))",
 			"file": "execute.py",
+			"file_size": 1399,
+			"file_write_time": 130975905543005342,
 			"settings":
 			{
-				"buffer_size": 1033,
+				"buffer_size": 1512,
 				"line_ending": "Windows"
 			}
 		},
@@ -128,10 +151,18 @@
 			}
 		},
 		{
-			"contents": "a=45\nprint a",
+			"file": "CACM/query.text",
 			"settings":
 			{
-				"buffer_size": 12,
+				"buffer_size": 14065,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "search.py",
+			"settings":
+			{
+				"buffer_size": 4325,
 				"line_ending": "Windows"
 			}
 		},
@@ -139,16 +170,17 @@
 			"file": "index.py",
 			"settings":
 			{
-				"buffer_size": 6505,
+				"buffer_size": 8791,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "search.py",
+			"contents": "Quey set to machine OR program AND logical AND loading NOT boolean\nQuey set to Time Sharing System\n2092\n1544\n2522\n1071\n2151\n2920\n1677\n2912\n1792\n1951\n2499\n1552\n1827\n2069\n1410\n2399\n1487\n796\n3025\n2380\n1526\n1523\n1519\n1657\n1391\n2669\n585\n2938\n2280\n2838\n1938\n3174\n1642\n1726\n1844\n2378\n2379\n2374\n2375\n2377\n2371\n1341\n1877\n1908\n2197\n1901\n2054\n971\n1506\n2621\n2626\n2625\n2629\n2424\n2950\n2951\n1916\n2578\n2219\n2218\n2892\n2358\n1748\n1749\n1746\n2357\n2439\n2730\n2632\n2947\n2946\n3069\n1892\n2344\n2130\n3105\n1960\n2036\n1769\n1753\n1752\n2501\n2500\n1805\n1281\n2228\n1978\n2128\n1605\n3112\n1471\n1572\n2535\n2306\n1947\n2859\n2914\n2917\n2918\n2919\n2853\n2852\n1653\n1626\n1394\n2318\n2319\n1708\n2317\n2314\n2311\n1391\n1665\n1664\n1087\n586\n1083\n594\n197\n190\n1088\n271\n3144\n2829\n276\n277\n2820\n2542\n2541\n2988\n3028\n3027\n3026\n3025\n3024\n3023\n3021\n2984\n2380\n1408\n2389\n1010\n1012\n1518\n1236\n2768\n1334\n1066\n2767\n1544\n2764\n1515\n3129\n1542\n39\n695\n1846\n1845\n1459\n3092\n3090\n1534\n2169\n2168\n438\n439\n2167\n2162\n2860\n3121\n334\n2838\n2618\n1908\n1549\n1902\n1901\n854\n851\n699\n2689\n2681\n2682\n98\n1464\n1623\n3204\n1627\n3202\n1998\n275\n2865\n2867\n2868\n2869\n2948\n3067\n2949\n3064\n2947\n2946\n2571\n2943\n2941\n2345\n2344\n3068\n2228\n2342\n1195\n1194\n2221\n1697\n1695\n1692\n2850\n1755\n1754\n1753\n1752\n1698\n1699\n1279\n619\n1173\n1170\n1270\n1271\n616\n617\n1179\n615\n1885\n1880\n2126\n2083\n944\n3112\n2084\n1472\n1476\n2533\n1571\n1570\n2536\n2535\n1304\n1348\n2711\n2715\n2718\n2719\n1308\n1225\n2406\n2407\n2405\n2402\n2151\n2152\n2153\n2017\n2016\n409\n1957\n1347\n1959\n1439\n1751\n1750\n1482\n391\n1487\n396\n1484\n1489\n398\n2308\n1710\n1719\n2305\n798\n1652\n1388\n1651\n1657\n2288\n585\n1274\n3153\n243\n242\n2833\n294\n2054\n2274\n2277\n1432\n3012\n2577\n3011\n3016\n3015\n2378\n2379\n2375\n2376\n2377\n1003\n2371\n2372\n2594\n1226\n2596\n2597\n2593\n1341\n2452\n1877\n1878\n2882\n1502\n2053\n972\n971\n2888\n656\n3089\n1507\n1505\n1506\n3087\n2113\n2114\n3080\n3082\n2622\n2623\n2626\n2627\n2624\n2629\n1910\n1912\n2753\n2750\n2697\n2080\n2690\n3147\n2087\n1617\n1960\n1962\n1611\n322\n202\n2875\n2878\n2989\n71\n3059\n2971\n3050\n1046\n1681\n1680\n1682\n1685\n1766\n1767\n1590\n1788\n1261\n1264\n2095\n3078\n2097\n1307\n2091\n2092\n2099\n3128\n2526\n696\n1543\n2522\n2486\n698\n2485\n2482\n3127\n2481\n1469\n1468\n2245\n1467\n2247\n1463\n1462\n1315\n2700\n1309\n2262\n1829\n1828\n2951\n1824\n1827\n414\n2798\n2143\n1386\n2365\n2064\n2065\n2794\n1923\n1924\n1926\n1927\n1741\n2667\n367\n2668\n2669\n1238\n1745\n1332\n1647\n1728\n1740\n1721\n1742\n2759\n2297\n60\n2195\n3168\n3169\n252\n2805\n2201\n2202\n1589\n1427\n2561\n2209\n2567\n731\n730\n1032\n1033\n1030\n1034\n1572\n2582\n2581\n637\n2423\n2424\n1862\n964\n1677\n963\n2894\n2892\n2796\n1456\n1519\n2519\n2514\n1514\n2516\n1516\n1458\n2106\n2105\n2730\n2632\n1844\n1811\n2741\n2740\n2035\n2034\n3180\n3181\n2747\n3183\n2749\n1533\n891\n1247\n1671\n1977\n1605\n1604\n2965\n2967\n2848\n2849\n2845\n2840\n2841\n3049\n3048\n1774\n2321\n2327\n1070\n1071\n1676\n282\n284\n1380\n2999\n675\n671\n3134\n3137\n3136\n3131\n1792\n2499\n2498\n2992\n2497\n2394\n2390\n1410\n1412\n2398\n2399\n2470\n980\n3002\n2870\n2786\n1852\n1853\n1854\n1856\n1525\n1526\n1255\n1252\n1523\n2070\n1393\n2075\n2604\n1931\n1937\n1939\n1938\n2560\n1417\n2928\n2920\n2924\n2370\n1325\n1734\n1988\n1989\n1108\n2817\n2811\n2812\n2819\n3070\n3071\n3072\n1591\n2959\n3076\n2184\n2954\n2955\n2189\n2188\n2950\n3174\n2211\n2219\n2218\n1181\n2358\n1749\n1744\n2353\n1747\n2356\n2357\n728\n1486\n1164\n1165\n2439\n1160\n1161\n1163\n1168\n2435\n1891\n1892\n2137\n46\n40\n3103\n1110\n1113\n1441\n1440\n1290\n1428\n2501\n2500\n2722\n2720\n2642\n2645\n2646\n1712\n1805\n2002\n2003\n1365\n2004\n3190\n1947\n2186\n1252\n2911\n2912\n2916\n1792\n2175\n2856\n1700\n1068\n1704\n2316\n271\n272\n2828\n278\n2825\n2820\n2821\n2543\n2989\n2988\n3025\n2380\n1409\n1408\n2263\n1234\n1237\n441\n2767\n2766\n2765\n103\n1847\n1844\n3091\n2169\n3097\n3094\n3095\n435\n3121\n335\n3127\n1908\n3125\n1901\n854\n852\n858\n2687\n2680\n1464\n1621\n3204\n1626\n1997\n2860\n2862\n2864\n2867\n2948\n3062\n2570\n3065\n3064\n2947\n3069\n2944\n1051\n2228\n2220\n1196\n1694\n1752\n1699\n144\n619\n1173\n1172\n1170\n617\n1179\n1886\n1884\n1281\n1280\n3118\n2128\n3114\n3113\n3112\n3110\n1572\n1571\n2537\n2535\n1304\n1307\n2716\n2650\n2036\n2151\n2033\n2030\n1956\n1951\n1347\n826\n822\n2903\n2902\n704\n705\n1487\n396\n1489\n1713\n796\n794\n2500\n1719\n1658\n1657\n2288\n2289\n585\n2280\n3153\n3151\n241\n3156\n2839\n2838\n2834\n2054\n3018\n1433\n2273\n224\n3014\n2378\n2375\n2377\n1003\n2371\n2372\n2373\n2594\n1349\n1225\n2455\n1341\n2598\n2453\n2452\n1877\n174\n2883\n2053\n2052\n972\n971\n2885\n2889\n1503\n3089\n3088\n185\n2110\n2111\n3033\n2968\n3082\n2620\n2621\n2626\n2627\n2628\n2629\n3085\n1915\n1916\n2754\n2695\n887\n942\n888\n1619\n1615\n1960\n1962\n322\n203\n73\n71\n3056\n3057\n1043\n2231\n2233\n1769\n1685\n1506\n1590\n1145\n1261\n1264\n2954\n2091\n2092\n1544\n2526\n1540\n2522\n2485\n2483\n2481\n2249\n2245\n2247\n1462\n1315\n2719\n2709\n2705\n2707\n2701\n2703\n2702\n124\n2388\n2951\n1824\n1827\n2069\n2145\n2140\n2062\n1924\n1928\n2953\n2667\n2344\n2664\n2665\n2938\n2939\n2936\n2933\n380\n1645\n1646\n1641\n1643\n1642\n1726\n1727\n2297\n1166\n3005\n3001\n2196\n3162\n3163\n2202\n2207\n1587\n2567\n2366\n2364\n1034\n1213\n2584\n637\n2421\n1350\n2424\n1354\n1869\n1677\n1455\n1519\n1518\n2515\n1459\n2513\n2734\n2730\n1811\n2740\n2742\n2745\n2746\n2749\n2168\n438\n1609\n2130\n1978\n1976\n1603\n1974\n1605\n1604\n768\n2963\n2846\n767\n2841\n3041\n3043\n3045\n1774\n2320\n1072\n1071\n1679\n1675\n282\n678\n1117\n2999\n2499\n1550\n2557\n2491\n2490\n3037\n3031\n2497\n2496\n2991\n1410\n1412\n1413\n2399\n1325\n2997\n2784\n2787\n1525\n1526\n2176\n2177\n1523\n1391\n1002\n1936\n1938\n1973\n849\n2674\n2929\n2920\n2923\n2922\n2927\n2973\n1739\n1637\n1735\n2815\n755\n3072\n3074\n3075\n3077\n3171\n2188\n2950\n3174\n3176\n2219\n2218\n1181\n2359\n1748\n1749\n1746\n1747\n1740\n2357\n2439\n2438\n1161\n1891\n1892\n2134\n48\n950\n3106\n3195\n40\n3103\n1113\n1112\n1441\n1118\n1564\n2501\n1295\n2726\n2722\n2720\n2645\n1712\n1805\n1366\n1364\n",
 			"settings":
 			{
-				"buffer_size": 4184,
-				"line_ending": "Windows"
+				"buffer_size": 5197,
+				"line_ending": "Windows",
+				"name": "Quey set to machine OR program AND logical AND loa"
 			}
 		},
 		{
@@ -183,10 +215,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 104.0,
-		"last_filter": "format",
+		"height": 392.0,
+		"last_filter": "lint",
 		"selected_items":
 		[
+			[
+				"lint",
+				"Anaconda: Disable linting on this file"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"install pac",
+				"Package Control: Install Package"
+			],
 			[
 				"format",
 				"Anaconda: Autoformat PEP8 Errors"
@@ -258,10 +302,6 @@
 			[
 				"comm",
 				"Toggle Block Comment"
-			],
-			[
-				"python",
-				"Build With: Python"
 			],
 			[
 				"",
@@ -359,11 +399,14 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Victor/Google Drive/GIT/RIW",
-		"/C/Users/Victor/Google Drive/GIT/RIW/CACM"
+		"/D/Google Drive/GIT/RIW",
+		"/D/Google Drive/GIT/RIW/CACM"
 	],
 	"file_history":
 	[
+		"/C/Users/Victor/Google Drive/GIT/RIW/index.py",
+		"/C/Users/Victor/Google Drive/GIT/RIW/compareAurore.py",
+		"/C/Users/Victor/Google Drive/GIT/RIW/progres.txt",
 		"/C/Users/Victor/Google Drive/GIT/RIW/CACM/cacm.all",
 		"/C/Users/Victor/AppData/Roaming/Sublime Text 3/Packages/Jedi - Python autocompletion/sublime_jedi.sublime-settings",
 		"/C/Users/Victor/Google Drive/GIT/RIW/main.py",
@@ -389,7 +432,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 204.0
 	},
 	"find_in_files":
 	{
@@ -404,6 +447,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".W\n I'd like papers on design and implementation of editing interfaces,\nwindow-managers, command interpreters, etc.  The essential issues are\nhuman interface design, with views on improvements to user efficiency,\neffectiveness and satisfaction.",
+			"\n    def generateDico(self):\n        articles = {}\n        article = {}\n        id = -1\n        separateurs = ['.I', '.T', '.W', '.B', '.A', '.N', '.X', '.K']\n        with open(self.source, 'r') as cacm:\n            for line in cacm:\n                if (line[0:2] == \".I\"):\n                    if (id != -1):\n                        articles[id] = article\n                        article = {}\n                    id = int(line[3:])\n                elif (line[0:2] in separateurs):\n                    delimiteur = line[0:2]\n                elif (line[0:2] not in separateurs and id != -1 and\n                      delimiteur != '.I'):\n                    if (delimiteur in article.keys()):\n                        if (delimiteur == '.A'):\n                            article[delimiteur] = article[\n                                delimiteur] + [line.replace('\\n', '')]\n                        else:\n                            article[delimiteur] = article[\n                                delimiteur] + line.replace('\\n', ' ')\n                    else:\n                        if (delimiteur == '.A'):\n                            article[delimiteur] = [line.replace('\\n', '')]\n                        else:\n                            article[delimiteur] = line.replace('\\n', ' ')\n            articles[id] = article\n        return articles",
+			"generateDico",
+			", u'",
+			"granting",
 			"I. 1657",
 			".I 197",
 			" ",
@@ -420,6 +468,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			", '"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -430,7 +479,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -439,15 +488,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1033,
+						"buffer_size": 1512,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1033,
-								1033
+								919,
+								919
 							]
 						],
 						"settings":
@@ -456,11 +505,41 @@
 							"auto_name": "",
 							"bh_regions":
 							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -471,55 +550,25 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_unmatched_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content"
 							],
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 123.0,
+						"translation.y": 796.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -535,276 +584,70 @@
 						"selection":
 						[
 							[
-								790085,
-								789779
+								83,
+								83
 							]
 						],
 						"settings":
 						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 634721.0,
+						"translation.y": 324.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "CACM/query.text",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12,
+						"buffer_size": 14065,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12,
-								12
+								229,
+								229
 							]
 						],
 						"settings":
 						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 3,
-					"file": "index.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6505,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1552,
-								1552
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1640.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "search.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4184,
+						"buffer_size": 4325,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2662,
-								2662
+								3347,
+								3347
 							]
 						],
 						"settings":
@@ -812,21 +655,26 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
@@ -842,21 +690,6 @@
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -866,14 +699,113 @@
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 190.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "index.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8791,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6979,
+								6979
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5687.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -881,6 +813,94 @@
 				},
 				{
 					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5197,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2112,
+								2112
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"auto_name": "Quey set to machine OR program AND logical AND loa",
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"default_dir": "C:\\Users\\Victor\\Google Drive\\GIT\\SAASm",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5254.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "tools.py",
 					"semi_transient": false,
 					"settings":
@@ -892,8 +912,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								110,
+								110
 							]
 						],
 						"settings":
@@ -901,51 +921,16 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -955,7 +940,42 @@
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
-								"bh_regex_content"
+								"bh_regex_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
 							"syntax": "Packages/Python/Python.tmLanguage"
 						},
@@ -963,7 +983,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -997,7 +1017,7 @@
 		"cols":
 		[
 			0.0,
-			0.877467105263,
+			0.59648236698,
 			1.0
 		],
 		"rows":
@@ -1009,7 +1029,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 143.0
+		"height": 61.0
 	},
 	"output.find_results":
 	{
@@ -1023,7 +1043,7 @@
 	"project": "RIW.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1065,7 +1085,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 417.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -8,12 +8,6 @@ import operator
 class Search:
     possibleTypes = ['bool','tf','tf-idf']
 
-    def __init__(self, type):
-        if (type in self.possibleTypes):
-            self.type = type
-        else:
-            raise ValueError('unknown search type')
-
     def setType(self, type):
         if (type in self.possibleTypes):
             self.type = type
@@ -22,11 +16,11 @@ class Search:
 
     def setQuery(self, query):
         self.query = query
-        print 'Quey set to ' + query
+        # print 'Quey set to ' + query
         return 0
 
     def getPostingFromIndexInverse(self, index, word):
-        return index[word].keys()
+        return index[word]['poids'].keys()
 
     def andPosting(self, a, b):
         return list(set(a) & set(b))
@@ -60,15 +54,14 @@ class Search:
         commonwords = 'CACM\common_words'
         indexedQueryObject = index.Index(source, commonwords)
         indexedQuery = indexedQueryObject.indexText(self.query)
+        tableauArticle=[]
         results = rec_dd()
         for mot in indexedQuery.keys():
+
             if mot in indexInverse.keys():
                 for article in indexInverse[mot]['poids'].keys():
-                    # print results[article]['score']
-                    # print article
-                    # print mot
-                    # print indexedQuery[mot]['weight']
-                    # print indexInverse[mot][article]['weight']
+                    if article not in tableauArticle:
+                        tableauArticle += [article]
                     if results[article]:
                         if self.type == 'tf':
                             results[article] += indexedQuery[mot][
@@ -83,8 +76,7 @@ class Search:
                         elif self.type == 'tf-idf':
                             results[article] = indexedQuery[mot][
                                 'weight'] * indexInverse[mot]['poids'][article]['tf-idf']
-
-        return results
+        return sorted(results.items(), key=operator.itemgetter(1), reverse=True)[:self.resultsLimit]
 
     def presentResults(self, results):
         sorted_results = sorted(
@@ -93,7 +85,7 @@ class Search:
         for result in sorted_results:
             print str(i) + " : " + result[0] + " with a score of " + str(result[1])
             i += 1
-            if i>10:
+            if i>30:
                 break
         return sorted_results
 
@@ -111,3 +103,6 @@ class Search:
             return produitcroise / (math.sqrt(sommeCarreA) + math.sqrt
                                     (sommeCarreB))
         return 0
+
+    def setLimit(self, limit):
+        self.resultsLimit = limit

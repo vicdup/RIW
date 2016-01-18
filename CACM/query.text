@@ -7,7 +7,9 @@ operating system for IBM computers?
  
 .I 2
 .W
- I am interested in articles written either by Prieve or Udo Pooch
+I am interested in articles written either by Prieve or Udo Pooch
+.V
+Prieve Udo Pooc
 .A
 Prieve, B.
 Pooch, U.
@@ -16,6 +18,8 @@ Pooch, U.
  
 .I 3
 .W
+ Intermediate languages used in construction of multi-targeted compilers; TCOLL
+ .V
  Intermediate languages used in construction of multi-targeted compilers; TCOLL
 .N
  3. Donna Bergmark, Comp Serv, Uris Hall (intermed lang)
@@ -27,6 +31,8 @@ possibly, but not exclusively, in a distributed environment.  I would
 rather see descriptions of complete mechanisms, with or without implementations,
 as opposed to theoretical work on the abstract problem.  Remote procedure
 calls and message-passing are examples of my interests.
+.V
+communication mechanisms disjoint processes, distributed environment, descriptions, remote procedure calls message-passing
 .N
  4. Pavel Curtis (comm mech for disjoint processes)
 
@@ -36,6 +42,8 @@ calls and message-passing are examples of my interests.
 window-managers, command interpreters, etc.  The essential issues are
 human interface design, with views on improvements to user efficiency,
 effectiveness and satisfaction.
+.V
+design implementation editing interfaces, window-managers, command interpreters, human interface design, user effciency, effectiveness, satisfaction
 .N
  5. Pavel Curtis (editing interfaces)
 
