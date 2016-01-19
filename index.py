@@ -81,19 +81,17 @@ class Index:
         #Un deuxieme passage permet de calculer les poids tf-idf des articles
         for article in self.index.keys():
             articleTfIdf = 0
+            articleProba = 0
             for mot in self.index[article].keys():
                 # Calcul du poids de l'article en tf-idf
-
-
-                # print str(article) + " " + mot
                 a = self.index[article][mot]
                 b = len(self.index.keys())
                 c = iIndex[mot]['total']
-                # print math.pow((1 + math.log10(a)) * math.log10(b / c), 2)
-
                 articleTfIdf += math.pow((1 + math.log10(a)) * math.log10(b / c), 2)
-            # print "norme de l'article "+ str(article)+" : " + str(articleTfIdf)
-            dicoWeights[article]['tf-idf']=articleTfIdf
+                dicoWeights[article]['tf-idf']=articleTfIdf
+
+                articleProba += math.pow(math.log10(b/c),2)
+                dicoWeights[article]['proba']=articleProba
             # Dernier passage pour calculer les poids des mots dans les articles normalises
         for article in self.index.keys():
             for mot in self.index[article].keys():
@@ -102,33 +100,18 @@ class Index:
                     iIndex[mot]['poids'][article]['tf'] = self.index[article][mot] / math.sqrt(float(dicoWeights[article]['frequence']))
                 # Calcul de tf-idf en log et normalise
                 if iIndex[mot]['total'] != 0 and dicoWeights[article]['tf-idf'] != 0:
+
                     iIndex[mot]['poids'][article]['tf-idf'] = (1 + math.log10(iIndex[mot]['poids'][article]['count'])) * math.log10(
                         len(self.index.keys()) / iIndex[mot]['total']) / math.sqrt(dicoWeights[article]['tf-idf'])
+                        
+                if dicoWeights[article]['proba'] != 0:
+                    iIndex[mot]['poids'][article]['proba'] = math.log10(len(self.index.keys()) / iIndex[mot]['total']) / math.sqrt(dicoWeights[article]['proba'])
         print 'index inverse généré en ' + str(time.clock() - t2) +'s'
         with open('iIndex.json', 'w') as outfile:
-            json.dump(iIndex, outfile)
+            json.dump(iIndex, outfile, sort_keys=True,indent=4, separators=(',', ': '))
 
         self.iIndex = iIndex
         return len(iIndex.keys())
-
-    # def generateInverseIndex(self):
-    #   iIndex = rec_dd()
-    #   dico = self.generateDico()
-    #   separateurs = ['.T','.W','.K']
-    #   commonWords = self.generateListCW()
-    #   for id in dico:
-    #       for sep in separateurs:
-    #           if (sep in dico[id].keys()):
-    #               for word in tokenisation(dico[id][sep].lower()):
-    #                   if (word not in commonWords):
-    # TODO lemmatisation
-    #                       word = lemmatisation(word)
-    #                       if iIndex[word][id]['count']:
-    #                           iIndex[word][id]['count']+=1
-    #                       else:
-    #                           iIndex[word][id]['count']=1
-    #   self.iIndex=iIndex
-    #   return len(iIndex.keys())
 
     def generateListCW(self):
         lComonWords = []
@@ -185,3 +168,4 @@ class Index:
                 print "Index inverse correctement charge " + str(len(self.iIndex.keys())) + " clefs"
         except Exception, e:
             raise e
+

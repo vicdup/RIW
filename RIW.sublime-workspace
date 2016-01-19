@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"rappel",
+				"rappel"
+			],
+			[
+				"resu",
+				"results"
+			],
+			[
+				"res",
+				"resultatsEvaluation"
+			],
+			[
+				"par",
+				"parsedQrels"
+			],
+			[
+				"p",
+				"parsedQrels"
+			],
+			[
+				"generateI",
+				"generateIIndex"
+			],
+			[
+				"gen",
+				"generateDico"
+			],
+			[
 				"artc",
 				"articleWeight	statement"
 			],
@@ -132,29 +160,61 @@
 	"buffers":
 	[
 		{
-			"contents": "\nimport search\nimport index\nimport json\n\nsourceEval = 'CACM\\query.text'\nsource = 'CACM\\cacm.all'\ncommonwords = 'CACM\\common_words'\n\n# index.generateInverseIndex()\n# print index.iIndex\n# print sys.getsizeof(index.iIndex)\n# print json.dumps(index.iIndex)\n# print len(index.iIndex.keys())\n\n# print json.dumps(index.iIndex)\n# print search.booleanSearch(index.iIndex)\n# vectorA = {\"victor\": 10, \"pauline\": 5, \"matthieu\": 3, \"aurore\": 12}\n# vectorB = {\"victor\": 2, \"pauline\": 0, \"matthieu\": 3, \"aurore\": 12}\n\n# print search.calculCosinus(vectorA,vectorB)\n# index.generateIIndex()\n# index.generateIndex()\n# import operator\n# print index.generateDico()[398]['.T']\n\n####\n####\n# Evaluation des algorithmes\n####\n####\n\n### Mise sous forme de dictionnaire du fichier query.text\n\nsourceEval = 'CACM\\query.text'\ncommonwords = 'CACM\\common_words'\n\nevaluation = index.Index(sourceEval, commonwords)\ndicoEval = index.generateDico()\n\n### \n\n# print json.dumps(index.generateDico())\n# index.generateIIndex()\n# index.generateIndex()\n# print json.dumps(index.index)\n# print index.iIndex['computer']['total']\n# index.loadIIndexFromFile()\n# search = search.Search('tf-idf')\n# search.setQuery('machine OR program AND logical AND loading NOT boolean')\n# search.setQuery('Intermediate languages used in construction of multi-targeted compilers; TCOLL')\n# search.presentResults(search.vectorielSearch(index.iIndex))\n# print search.booleanSearch(index.iIndex)\n# print json.dumps(index.iIndex, sort_keys=True, indent=4, separators=(',', ': '))",
 			"file": "execute.py",
-			"file_size": 1399,
-			"file_write_time": 130975905543005342,
 			"settings":
 			{
-				"buffer_size": 1512,
+				"buffer_size": 2035,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "CACM/cacm.all",
+			"file": "/D/Google Drive/GIT/cuddly-bassoon/angular-phonecat/bower.json",
 			"settings":
 			{
-				"buffer_size": 2187734,
+				"buffer_size": 432,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/Downloads/inverseIndexTFIDFwithoutNorm.py",
+			"settings":
+			{
+				"buffer_size": 3343,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "{\n  \"name\": \"angular-phonecat\",\n  \"description\": \"A starter project for AngularJS\",\n  \"version\": \"0.0.0\",\n  \"homepage\": \"https://github.com/angular/angular-phonecat\",\n  \"license\": \"MIT\",\n  \"private\": true,\n  \"dependencies\": {\n    \"angular\": \"1.4.x\",\n    \"angular-mocks\": \"1.4.x\",\n    \"jquery\": \"~2.1.1\",\n    \"bootstrap\": \"~3.1.1\",\n    \"angular-route\": \"1.4.x\",\n    \"angular-resource\": \"1.4.x\",\n    \"angular-animate\": \"1.4.x\"\n  }\n}\n",
+			"file": "/D/Google Drive/GIT/cuddly-bassoon/angular-phonecat/old/bower.json",
+			"file_size": 448,
+			"file_write_time": 130976678401466294,
+			"settings":
+			{
+				"buffer_size": 431,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Google Drive/GIT/cuddly-bassoon/angular-phonecat/package.json",
+			"settings":
+			{
+				"buffer_size": 1004,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/Downloads/ModelVectorialExtended.py",
+			"settings":
+			{
+				"buffer_size": 2464,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "CACM/query.text",
 			"settings":
 			{
-				"buffer_size": 14065,
+				"buffer_size": 14064,
 				"line_ending": "Unix"
 			}
 		},
@@ -162,7 +222,15 @@
 			"file": "search.py",
 			"settings":
 			{
-				"buffer_size": 4325,
+				"buffer_size": 4061,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "evalution.py",
+			"settings":
+			{
+				"buffer_size": 656,
 				"line_ending": "Windows"
 			}
 		},
@@ -170,7 +238,7 @@
 			"file": "index.py",
 			"settings":
 			{
-				"buffer_size": 8791,
+				"buffer_size": 7684,
 				"line_ending": "Windows"
 			}
 		},
@@ -215,10 +283,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "lint",
+		"height": 159.0,
+		"last_filter": "json",
 		"selected_items":
 		[
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"lint",
 				"Anaconda: Disable linting on this file"
@@ -264,10 +340,6 @@
 				"Git: Add All"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
 				"browse",
 				"Preferences: Browse Packages"
 			],
@@ -290,10 +362,6 @@
 			[
 				"pack",
 				"Package Control: Install Package"
-			],
-			[
-				"json",
-				"Pretty JSON: Format (Pretty Print) JSON"
 			],
 			[
 				"comment",
@@ -368,7 +436,7 @@
 				"Set Syntax: Python"
 			]
 		],
-		"width": 464.0
+		"width": 763.0
 	},
 	"console":
 	{
@@ -399,11 +467,12 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Google Drive/GIT/RIW",
-		"/D/Google Drive/GIT/RIW/CACM"
+		"/D/Google Drive/GIT/RIW"
 	],
 	"file_history":
 	[
+		"/D/Google Drive/GIT/RIW/evaluation.csv",
+		"/D/Google Drive/GIT/RIW/results.csv",
 		"/C/Users/Victor/Google Drive/GIT/RIW/index.py",
 		"/C/Users/Victor/Google Drive/GIT/RIW/compareAurore.py",
 		"/C/Users/Victor/Google Drive/GIT/RIW/progres.txt",
@@ -432,7 +501,7 @@
 	],
 	"find":
 	{
-		"height": 204.0
+		"height": 64.0
 	},
 	"find_in_files":
 	{
@@ -447,6 +516,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"query",
+			"parsedQrels[int(line[0:2])] = line [4:7]",
+			"dico",
 			".W\n I'd like papers on design and implementation of editing interfaces,\nwindow-managers, command interpreters, etc.  The essential issues are\nhuman interface design, with views on improvements to user efficiency,\neffectiveness and satisfaction.",
 			"\n    def generateDico(self):\n        articles = {}\n        article = {}\n        id = -1\n        separateurs = ['.I', '.T', '.W', '.B', '.A', '.N', '.X', '.K']\n        with open(self.source, 'r') as cacm:\n            for line in cacm:\n                if (line[0:2] == \".I\"):\n                    if (id != -1):\n                        articles[id] = article\n                        article = {}\n                    id = int(line[3:])\n                elif (line[0:2] in separateurs):\n                    delimiteur = line[0:2]\n                elif (line[0:2] not in separateurs and id != -1 and\n                      delimiteur != '.I'):\n                    if (delimiteur in article.keys()):\n                        if (delimiteur == '.A'):\n                            article[delimiteur] = article[\n                                delimiteur] + [line.replace('\\n', '')]\n                        else:\n                            article[delimiteur] = article[\n                                delimiteur] + line.replace('\\n', ' ')\n                    else:\n                        if (delimiteur == '.A'):\n                            article[delimiteur] = [line.replace('\\n', '')]\n                        else:\n                            article[delimiteur] = line.replace('\\n', ' ')\n            articles[id] = article\n        return articles",
 			"generateDico",
@@ -468,6 +540,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"self.dico",
 			", '"
 		],
 		"reverse": false,
@@ -479,7 +552,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -488,15 +561,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1512,
+						"buffer_size": 2035,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								919,
-								919
+								1327,
+								1327
 							]
 						],
 						"settings":
@@ -565,55 +638,175 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 796.0,
+						"translation.y": 1852.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/Google Drive/GIT/cuddly-bassoon/angular-phonecat/bower.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 432,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								345,
+								330
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 73.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "CACM/cacm.all",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "/D/Downloads/inverseIndexTFIDFwithoutNorm.py",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2187734,
+						"buffer_size": 3343,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								83,
-								83
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 324.0,
+						"translation.y": 2959.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "CACM/query.text",
+					"buffer": 3,
+					"file": "/D/Google Drive/GIT/cuddly-bassoon/angular-phonecat/old/bower.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14065,
+						"buffer_size": 431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								229,
-								229
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/Google Drive/GIT/cuddly-bassoon/angular-phonecat/package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1004,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								435,
+								435
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 3.0,
+						"translation.y": 337.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/Downloads/ModelVectorialExtended.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2464,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								711,
+								711
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1442.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "CACM/query.text",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14064,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								176,
+								176
 							]
 						],
 						"settings":
@@ -621,33 +814,33 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 491.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 7,
 					"file": "search.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4325,
+						"buffer_size": 4061,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3347,
-								3347
+								379,
+								379
 							]
 						],
 						"settings":
@@ -716,27 +909,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 996.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 8,
+					"file": "evalution.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 656,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								591,
+								615
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 186.0,
+						"translation.y": 403.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "index.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8791,
+						"buffer_size": 7684,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6979,
-								6979
+								7533,
+								7513
 							]
 						],
 						"settings":
@@ -804,15 +1025,15 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 5687.0,
+						"translation.x": 167.0,
+						"translation.y": 6298.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 10,
 					"semi_transient": false,
 					"settings":
 					{
@@ -893,14 +1114,14 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 5254.0,
+						"translation.y": 5544.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 11,
 					"file": "tools.py",
 					"semi_transient": false,
 					"settings":
@@ -983,7 +1204,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 10,
 					"type": "text"
 				}
 			]
@@ -1017,7 +1238,7 @@
 		"cols":
 		[
 			0.0,
-			0.59648236698,
+			0.483901073262,
 			1.0
 		],
 		"rows":
@@ -1029,7 +1250,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 61.0
+		"height": 188.0
 	},
 	"output.find_results":
 	{
@@ -1043,7 +1264,7 @@
 	"project": "RIW.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 120.0
 	},
 	"save_all_on_build": true,
 	"select_file":

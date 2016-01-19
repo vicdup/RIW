@@ -6,7 +6,7 @@ import operator
 
 
 class Search:
-    possibleTypes = ['bool','tf','tf-idf']
+    possibleTypes = ['bool','tf','tf-idf', 'proba']
 
     def setType(self, type):
         if (type in self.possibleTypes):
@@ -57,26 +57,33 @@ class Search:
         tableauArticle=[]
         results = rec_dd()
         for mot in indexedQuery.keys():
-
             if mot in indexInverse.keys():
                 for article in indexInverse[mot]['poids'].keys():
-                    if article not in tableauArticle:
-                        tableauArticle += [article]
-                    if results[article]:
-                        if self.type == 'tf':
-                            results[article] += indexedQuery[mot][
-                                'weight'] * indexInverse[mot]['poids'][article]['tf']
-                        elif self.type == 'tf-idf':
-                            results[article] += indexedQuery[mot][
-                                'weight'] * indexInverse[mot]['poids'][article]['tf-idf']
-                    else:
-                        if self.type == 'tf':
-                            results[article] = indexedQuery[mot][
-                                'weight'] * indexInverse[mot]['poids'][article]['tf']
-                        elif self.type == 'tf-idf':
-                            results[article] = indexedQuery[mot][
-                                'weight'] * indexInverse[mot]['poids'][article]['tf-idf']
+                    if self.type!='proba' or indexInverse[mot]['poids'][article]['proba']!=0:
+                        if article not in tableauArticle:
+                            tableauArticle += [article]
+                        if results[article]:
+                            if self.type == 'tf':
+                                results[article] += indexedQuery[mot][
+                                    'weight'] * indexInverse[mot]['poids'][article]['tf']
+                            elif self.type == 'tf-idf':
+                                results[article] += indexedQuery[mot][
+                                    'weight'] * indexInverse[mot]['poids'][article]['tf-idf']
+                            elif self.type == 'proba':
+                                results[article] += math.log10((1-indexInverse[mot]['poids'][article]['proba'])/indexInverse[mot]['poids'][article]['proba'])
+                        else:
+                            if self.type == 'tf':
+                                results[article] = indexedQuery[mot][
+                                    'weight'] * indexInverse[mot]['poids'][article]['tf']
+                            elif self.type == 'tf-idf':
+                                results[article] = indexedQuery[mot][
+                                    'weight'] * indexInverse[mot]['poids'][article]['tf-idf']
+                            elif self.type =='proba':
+                                if indexInverse[mot]['poids'][article]['proba'] == 1 :
+                                    indexInverse[mot]['poids'][article]['proba'] = 0.999999999
+                                results[article] = math.log10((1-indexInverse[mot]['poids'][article]['proba'])/indexInverse[mot]['poids'][article]['proba'])
         return sorted(results.items(), key=operator.itemgetter(1), reverse=True)[:self.resultsLimit]
+
 
     def presentResults(self, results):
         sorted_results = sorted(

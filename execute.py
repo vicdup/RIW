@@ -59,16 +59,15 @@ for requete in evaluation.dico:
 	recherche.setLimit(100)
 	resultsScored = recherche.vectorielSearch(cacm.iIndex)
 	results = [int(result[0]) for result in resultsScored]
-	for result in range(len(results)):
-		if results[result] in parsedQrels[requete]:
-			results[result]='p' + str(results[result])
-	g.writerow([requete] + results)
+	scores = [float(result[1]) for result in resultsScored]
 	for k in range(100):
-		# print results
-		# print parsedQrels[requete]
 		if parsedQrels[requete]:
 			resultatsEvaluation[requete][k]['rappel'] = calculRappel(results, parsedQrels[requete],k) 
 			resultatsEvaluation[requete][k]['precision'] = calculPrecision(results, parsedQrels[requete],k) 
+	for result in range(len(results)):
+		if results[result] in parsedQrels[requete]:
+			results[result]='p' + str(results[result])
+	g.writerow([requete] + [str(results[i]) + ' ' + str(scores [i]) for i in range(len(results))])
 
 
 header = ['requete','ordre','rappel','precision']
