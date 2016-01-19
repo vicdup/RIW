@@ -23,8 +23,9 @@ cacm = index.Index(source, commonwords)
 # Parsing de la source pour en faire un dico
 cacm.generateDico()
 # Creation de l'index inverse (comprends la creation de l'index)
-# cacm.generateIIndex()
-cacm.loadIIndexFromFile()
+cacm.generateIndex()
+cacm.generateIIndex()
+#cacm.loadIIndexFromFile()
 
 ###
 ###
@@ -57,7 +58,7 @@ evaluation.generateDico()
 for requete in evaluation.dico:
 	recherche.setQuery(evaluation.dico[requete]['.W'])
 	recherche.setLimit(100)
-	resultsScored = recherche.vectorielSearch(cacm.iIndex)
+	resultsScored = recherche.executeSearch(cacm.iIndex)
 	results = [int(result[0]) for result in resultsScored]
 	scores = [float(result[1]) for result in resultsScored]
 	for k in range(100):

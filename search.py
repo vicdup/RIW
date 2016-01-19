@@ -49,7 +49,7 @@ class Search:
                     (indexInverse, tquery[i + 1]))
         return posts
 
-    def vectorielSearch(self, indexInverse):
+    def otherSearch(self, indexInverse):
         source = 'CACM\cacm.all'
         commonwords = 'CACM\common_words'
         indexedQueryObject = index.Index(source, commonwords)
@@ -83,6 +83,12 @@ class Search:
                                     indexInverse[mot]['poids'][article]['proba'] = 0.999999999
                                 results[article] = math.log10((1-indexInverse[mot]['poids'][article]['proba'])/indexInverse[mot]['poids'][article]['proba'])
         return sorted(results.items(), key=operator.itemgetter(1), reverse=True)[:self.resultsLimit]
+
+    def executeSearch(self, indexInverse):
+        if self.type in ['tf-idf', 'tf', 'proba']:
+            return self.otherSearch(indexInverse)
+        else:
+            return self.booleanSearch(indexInverse)
 
 
     def presentResults(self, results):

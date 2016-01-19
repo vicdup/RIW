@@ -6,14 +6,18 @@ from tools import *
 
 
 class Index:
-
+    #Cette classe permet de gérer tout le code en rapport les index
     'Index class'
 
     def __init__(self, source, comonwords):
+        #On définit toujours initialement la source et les stop words
         self.source = source
         self.comonwords = comonwords
 
     def generateIndex(self):
+        #Génération de l'index
+        print "Génération de l'index sur " + self.source
+        t0 = time.clock()
         index = {}
         separateurs = ['.T', '.W', '.K']
         commonWords = self.generateListCW()
@@ -30,8 +34,8 @@ class Index:
                                 index[id][word] = 1
                             else:
                                 index[id][word] += 1
-        with open('index.json', 'w') as outfile:
-            json.dump(index, outfile)
+        t1 = time.clock()
+        print "Index généré en ", t1 - t0, "secondes"
         self.index = index
         return len(index.keys())
 
@@ -54,12 +58,12 @@ class Index:
         return index
 
     def generateIIndex(self):
-        iIndex = rec_dd()
-        t1 = time.clock()
-        self.generateIndex()
+        #Génération de l'index inversé
+        print "Génération de l'index inversé sur ", self.source
         t2= time.clock()
-        print 'index genéré en ' + str(t2 - t1) + 's'
+        iIndex = rec_dd()
         dicoWeights=rec_dd()
+        nombreArticles = len(self.index.keys())
         #Un premier passage permet de remplir l'index inverse avec la frequence et le total
         for article in self.index.keys():
             articleWeight = 0
@@ -78,21 +82,22 @@ class Index:
                     iIndex[mot]['total'] += self.index[article][mot]
                 else:
                     iIndex[mot]['total'] = self.index[article][mot]
-        #Un deuxieme passage permet de calculer les poids tf-idf des articles
+        #Un deuxieme passage permet de calculer les poids tf-idf et proba des articles
         for article in self.index.keys():
             articleTfIdf = 0
             articleProba = 0
             for mot in self.index[article].keys():
-                # Calcul du poids de l'article en tf-idf
-                a = self.index[article][mot]
-                b = len(self.index.keys())
-                c = iIndex[mot]['total']
-                articleTfIdf += math.pow((1 + math.log10(a)) * math.log10(b / c), 2)
+                # Calcul du poids de l'article en tf-idf et proba
+                occurenceDuMotDansLArticle = self.index[article][mot]
+                occurenceDuMotDansLaCollection = iIndex[mot]['total']
+                d = math.log10(nombreArticles/occurenceDuMotDansLaCollection)
+
+                articleTfIdf += math.pow((1 + math.log10(occurenceDuMotDansLArticle)) * d, 2)
                 dicoWeights[article]['tf-idf']=articleTfIdf
 
-                articleProba += math.pow(math.log10(b/c),2)
+                articleProba += math.pow(d,2)
                 dicoWeights[article]['proba']=articleProba
-            # Dernier passage pour calculer les poids des mots dans les articles normalises
+        # Dernier passage pour calculer les poids des mots dans les articles normalises
         for article in self.index.keys():
             for mot in self.index[article].keys():
                 # Calcul de tf simple normalise
@@ -103,13 +108,10 @@ class Index:
 
                     iIndex[mot]['poids'][article]['tf-idf'] = (1 + math.log10(iIndex[mot]['poids'][article]['count'])) * math.log10(
                         len(self.index.keys()) / iIndex[mot]['total']) / math.sqrt(dicoWeights[article]['tf-idf'])
-                        
+                #Calcul du modèle proba
                 if dicoWeights[article]['proba'] != 0:
                     iIndex[mot]['poids'][article]['proba'] = math.log10(len(self.index.keys()) / iIndex[mot]['total']) / math.sqrt(dicoWeights[article]['proba'])
-        print 'index inverse généré en ' + str(time.clock() - t2) +'s'
-        with open('iIndex.json', 'w') as outfile:
-            json.dump(iIndex, outfile, sort_keys=True,indent=4, separators=(',', ': '))
-
+        print 'index inverse généré en ', time.clock() - t2, 'secondes'
         self.iIndex = iIndex
         return len(iIndex.keys())
 
@@ -121,6 +123,8 @@ class Index:
         return lComonWords
 
     def generateDico(self):
+        print "Parsage de la collection",self.source," en dictionnaire Python"
+        t1 = time.clock()
         articles = {}
         article = {}
         id = -1
@@ -150,20 +154,22 @@ class Index:
                             article[delimiteur] = line.replace('\n', ' ')
             articles[id] = article
         self.dico = articles
+        t2 = time.clock()
+        print "Collection parsée en ", t2-t1, "secondes"
         return len(articles)
 
    
-    def loadIndexFromFile(self):
+    def loadIndexFromFile(self, file):
         try:
-            with open('index.json') as data_file:
+            with open(file) as data_file:
                 self.index = json.load(data_file)
                 print "Index correctement charge " + str(len(self.index.keys())) + " clefs"
         except Exception, e:
             raise e
 
-    def loadIIndexFromFile(self):
+    def loadIIndexFromFile(self, file):
         try:
-            with open('iIndex.json') as data_file:
+            with open(file) as data_file:
                 self.iIndex = json.load(data_file)
                 print "Index inverse correctement charge " + str(len(self.iIndex.keys())) + " clefs"
         except Exception, e:
